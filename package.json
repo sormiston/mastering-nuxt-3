@@ -12,5 +12,6 @@
     "@vueuse/core": "^9.6.0",
     "@vueuse/nuxt": "^9.6.0",
     "nuxt": "3.0.0"
-  }
+  },
+  "packageManager": "pnpm@8.1.1"
 }
