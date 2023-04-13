@@ -34,33 +34,49 @@
 
 <script setup>
 const course = useCourse();
-const route = useRoute();
+const { params } = useRoute();
+
+definePageMeta({
+  validate({ params }) {
+    const course = useCourse();
+
+    const chapter = course.chapters.find(
+      (chapter) => chapter.slug === params.chapterSlug
+    );
+
+    if (!chapter) {
+      return createError({
+        message: `Chapter not found`,
+        statusCode: 404,
+      });
+    }
+
+    const lesson = chapter.lessons.find(
+      (lesson) => lesson.slug === params.lessonSlug
+    );
+
+    if (!lesson) {
+      return createError({
+        message: `Lesson not found`,
+        statusCode: 404,
+      });
+    }
+
+    return true;
+  },
+});
 
 const chapter = computed(() => {
   return course.chapters.find(
-    (chapter) => chapter.slug === route.params.chapterSlug
+    (chapter) => chapter.slug === params.chapterSlug
   );
 });
-
-if (!chapter.value) {
-  throw createError({
-    message: "Chapter not found",
-    statusCode: 404,
-  });
-}
 
 const lesson = computed(() => {
   return chapter.value.lessons.find(
-    (lesson) => lesson.slug === route.params.lessonSlug
+    (lesson) => lesson.slug === params.lessonSlug
   );
 });
-
-if (!lesson.value) {
-  throw createError({
-    message: "Lesson not found",
-    statusCode: 404,
-  });
-}
 
 const title = computed(() => {
   return `${lesson.value.title} - ${course.title}`;
