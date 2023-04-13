@@ -27,7 +27,7 @@
     <p>{{ lesson.text }}</p>
     <LessonCompleteButton
       :model-value="isLessonComplete"
-      @update:model-value="throw createError('Could not update');"
+      @update:model-value="toggleComplete"
     />
   </div>
 </template>
@@ -51,6 +51,7 @@ const lesson = computed(() => {
 const title = computed(() => {
   return `${lesson.value.title} - ${course.title}`;
 });
+
 useHead({
   title,
 });
