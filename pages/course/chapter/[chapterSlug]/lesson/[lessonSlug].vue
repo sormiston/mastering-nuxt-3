@@ -42,11 +42,25 @@ const chapter = computed(() => {
   );
 });
 
+if (!chapter.value) {
+  throw createError({
+    message: "Chapter not found",
+    statusCode: 404,
+  });
+}
+
 const lesson = computed(() => {
   return chapter.value.lessons.find(
     (lesson) => lesson.slug === route.params.lessonSlug
   );
 });
+
+if (!lesson.value) {
+  throw createError({
+    message: "Lesson not found",
+    statusCode: 404,
+  });
+}
 
 const title = computed(() => {
   return `${lesson.value.title} - ${course.title}`;
