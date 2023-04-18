@@ -16,14 +16,15 @@ const { query } = useRoute();
 const supabase = useSupabaseAuthClient();
 
 const login = async () => {
+  debugger
   const redirectTo = `${window.location.origin}${query.redirectTo}`;
-  const { error } = await supabase.auth.signInWithOAuth({
-    provider: "github",
-    options: { redirectTo },
-  });
+  // const { error } = await supabase.auth.signInWithOAuth({
+  //   provider: "github",
+  //   options: { redirectTo },
+  // });
 
-  if (error) {
-    console.error(error);
-  }
+  // if (error) {
+  //   console.error(error);
+  // }
 };
 </script>
