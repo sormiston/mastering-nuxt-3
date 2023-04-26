@@ -3,7 +3,6 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
-    "dev-debug": "node --inspect node_modules/@nuxt/kit/dist/index.mjs",
     "generate": "nuxt generate",
     "preview": "nuxt preview"
   },
@@ -13,7 +12,8 @@
     "@tailwindcss/typography": "^0.5.9",
     "@vueuse/core": "^9.13.0",
     "@vueuse/nuxt": "^9.13.0",
-    "nuxt": "3.4.2"
+    "nuxt": "3.4.2",
+    "winston": "^3.8.2"
   },
   "packageManager": "pnpm@8.1.1"
 }
