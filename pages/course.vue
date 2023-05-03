@@ -53,12 +53,12 @@
   </div>
 </template>
 
-<script setup>
-const { chapters, title } = useCourse();
-const resetError = async (error) => {
-  await navigateTo(
-    "/course/chapter/1-chapter-1/lesson/1-introduction-to-typescript-with-vue-js-3"
-  );
+<script lang="ts" setup>
+const course = await useCourse();
+const firstLesson = await useFirstLesson();
+const { title, chapters } = course.value;
+const resetError = async (error: Ref) => {
+  await navigateTo(firstLesson.value.path);
   error.value = null;
 };
 </script>
