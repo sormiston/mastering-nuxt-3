@@ -20,7 +20,10 @@
         Download Video
       </NuxtLink>
     </div>
-    <VideoPlayer v-if="lesson.videoId" :video-id="lesson.videoId" />
+    <VideoPlayer
+      v-if="lesson.videoId"
+      :video-id="lesson.videoId"
+    />
     <p>{{ lesson.text }}</p>
     <LessonCompleteButton
       :model-value="isLessonComplete"
@@ -30,17 +33,16 @@
 </template>
 
 <script lang="ts" setup>
-const course = useCourse();
+const course = await useCourse();
 const { params } = useRoute();
 const { chapterSlug, lessonSlug } = params;
-
 const lesson = await useLesson(chapterSlug as string, lessonSlug as string);
 
 definePageMeta({
   middleware: [
-    ({ params }) => {
-      const course = useCourse();
-      const chapter = course.chapters.find(
+    async ({ params }) => {
+      const course = await useCourse();
+      const chapter = course.value.chapters.find(
         (chapter) => chapter.slug === params.chapterSlug
       );
 
@@ -71,13 +73,13 @@ definePageMeta({
 });
 
 const chapter = computed(() => {
-  return course.chapters.find(
+  return course.value.chapters.find(
     (chapter) => chapter.slug === params.chapterSlug
   )!;
 });
 
 const title = computed(() => {
-  return `${lesson.value?.title} - ${course.title}`;
+  return `${lesson.value?.title} - ${course.value.title}`;
 });
 
 useHead({
