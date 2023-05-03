@@ -20,10 +20,7 @@
         Download Video
       </NuxtLink>
     </div>
-    <VideoPlayer
-      v-if="lesson.videoId"
-      :videoId="lesson.videoId"
-    />
+    <VideoPlayer v-if="lesson.videoId" :video-id="lesson.videoId" />
     <p>{{ lesson.text }}</p>
     <LessonCompleteButton
       :model-value="isLessonComplete"
@@ -32,15 +29,17 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 const course = useCourse();
 const { params } = useRoute();
+const { chapterSlug, lessonSlug } = params;
+
+const lesson = await useLesson(chapterSlug as string, lessonSlug as string);
 
 definePageMeta({
   middleware: [
-    function ({ params }) {
+    ({ params }) => {
       const course = useCourse();
-
       const chapter = course.chapters.find(
         (chapter) => chapter.slug === params.chapterSlug
       );
@@ -72,31 +71,31 @@ definePageMeta({
 });
 
 const chapter = computed(() => {
-  return course.chapters.find((chapter) => chapter.slug === params.chapterSlug);
-});
-
-const lesson = computed(() => {
-  return chapter.value.lessons.find(
-    (lesson) => lesson.slug === params.lessonSlug
-  );
+  return course.chapters.find(
+    (chapter) => chapter.slug === params.chapterSlug
+  )!;
 });
 
 const title = computed(() => {
-  return `${lesson.value.title} - ${course.title}`;
+  return `${lesson.value?.title} - ${course.title}`;
 });
 
 useHead({
   title,
 });
 
-const progress = useLocalStorage("progress", []);
+const progress = useLocalStorage<Array<Array<boolean>>>("progress", [[]]);
 
 const isLessonComplete = computed(() => {
+  if (!chapter.value || !lesson.value) {
+    return false;
+  }
+
   if (!progress.value[chapter.value.number - 1]) {
     return false;
   }
 
-  if (!progress.value[chapter.value.number - 1][lesson.value.number - 1]) {
+  if (!progress.value[chapter.value?.number - 1][lesson.value?.number - 1]) {
     return false;
   }
 
@@ -104,6 +103,10 @@ const isLessonComplete = computed(() => {
 });
 
 const toggleComplete = () => {
+  if (!chapter.value || !lesson.value) {
+    return false;
+  }
+
   if (!progress.value[chapter.value.number - 1]) {
     progress.value[chapter.value.number - 1] = [];
   }
