@@ -1,4 +1,4 @@
-import { StorageSerializers } from "@vueuse/core";
+import { StorageSerializers } from '@vueuse/core';
 
 export default async <T>(url: string) => {
   const cached = useSessionStorage<T>(url, null, {
@@ -7,9 +7,7 @@ export default async <T>(url: string) => {
   });
 
   if (!cached.value) {
-    const { data, error } = await useFetch<T>(url);
-
-    if (error.value) {
+    const { data, error } = await useFetch<T>(url); if (error.value) {
       throw createError({
         ...error.value,
         statusMessage: `Could not fetch data from ${url}`,

@@ -26,12 +26,12 @@ type OutlineBase = {
   number: number;
 };
 
-type OutlineChapter = OutlineBase & {
-  lessons: OutlineLesson[];
-};
-
 type OutlineLesson = OutlineBase & {
   path: string;
+};
+
+type OutlineChapter = OutlineBase & {
+  lessons: OutlineLesson[];
 };
 
 export type CourseMeta = {

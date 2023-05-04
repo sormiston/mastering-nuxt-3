@@ -1,3 +1,3 @@
-import { CourseMeta } from "@/types/types";
+import { CourseMeta } from '@/types/types';
 
-export default () => useFetchWithCache<CourseMeta>("/api/course/meta");
+export default () => useFetchWithCache<CourseMeta>('/api/course/meta');

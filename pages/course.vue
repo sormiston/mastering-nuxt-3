@@ -12,9 +12,9 @@
       >
         <h3>Chapters</h3>
         <div
-          class="space-y-1 mb-4 flex flex-col"
           v-for="chapter in chapters"
           :key="chapter.slug"
+          class="space-y-1 mb-4 flex flex-col"
         >
           <h4>{{ chapter.title }}</h4>
           <NuxtLink

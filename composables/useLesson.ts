@@ -1,4 +1,4 @@
-import { LessonWithPath } from "@/types/types";
+import { LessonWithPath } from '@/types/types';
 
 export default (chapterSlug: string, lessonSlug: string) =>
   useFetchWithCache<LessonWithPath>(
