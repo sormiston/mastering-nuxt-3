@@ -26,7 +26,7 @@ watchEffect(async () => {
 const login = async () => {
   const redirectTo = `${window.location.origin}${query.redirectTo}`;
   const { error } = await auth.signInWithOAuth({
-    provider: "github",
+    provider: 'github',
     options: { redirectTo },
   });
 

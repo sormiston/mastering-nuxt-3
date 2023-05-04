@@ -3,15 +3,21 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
+    "lint": "eslint .",
+    "watch": "chokidar '**/*.{ts,js,vue}' -t 600 --initial --silent -c",
+    "lint:fix": "eslint --fix .",
     "generate": "nuxt generate",
     "preview": "nuxt preview"
   },
   "devDependencies": {
+    "@nuxtjs/eslint-config-typescript": "^12.0.0",
     "@nuxtjs/supabase": "0.3.5",
     "@nuxtjs/tailwindcss": "^6.6.6",
     "@tailwindcss/typography": "^0.5.9",
     "@vueuse/core": "^9.13.0",
     "@vueuse/nuxt": "^9.13.0",
+    "chokidar-cli": "^3.0.0",
+    "eslint": "^8.39.0",
     "nuxt": "3.4.2",
     "winston": "^3.8.2"
   },

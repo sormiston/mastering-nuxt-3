@@ -1,15 +1,13 @@
-import winston from "winston";
-
-const { createLogger, format, transports } = winston;
+import { createLogger, format, transports } from 'winston';
 
 const logger = createLogger({
-  level: "http",
-  format: winston.format.combine(
-    winston.format.printf((info) => {
+  level: 'http',
+  format: format.combine(
+    format.printf((info) => {
       return `
   ${new Date().toUTCString()} - HTTP: ${info.message}`;
     }),
-    winston.format.colorize({ all: true })
+    format.colorize({ all: true })
   ),
   transports: [new transports.Console()],
 });

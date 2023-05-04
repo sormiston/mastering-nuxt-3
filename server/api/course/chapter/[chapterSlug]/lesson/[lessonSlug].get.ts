@@ -1,6 +1,6 @@
-import { getRouterParams } from "h3";
-import { Course, Chapter, Lesson, LessonWithPath } from "@/types/types";
-import course from "@/server/courseData.js";
+import { getRouterParams } from 'h3';
+import { Course, Chapter, Lesson, LessonWithPath } from '@/types/types';
+import course from '@/server/courseData.js';
 
 course as Course;
 
@@ -12,24 +12,24 @@ export default defineEventHandler((event): LessonWithPath => {
   // alternatively, can access event.context.params;
   // const { chapterSlug, lessonSlug } = event.context.params;
   const chapter: Maybe<Chapter> = course.chapters.find(
-    (chapter) => chapter.slug === chapterSlug
+    chapter => chapter.slug === chapterSlug
   );
 
   if (!chapter) {
     throw createError({
       statusCode: 404,
-      message: `Chapter not found`,
+      message: 'Chapter not found',
     });
   }
 
   const lesson: Maybe<Lesson> = chapter.lessons.find(
-    (lesson) => lesson.slug === lessonSlug
+    lesson => lesson.slug === lessonSlug
   );
 
   if (!lesson) {
     throw createError({
       statusCode: 404,
-      message: `Lesson not found`,
+      message: 'Lesson not found',
     });
   }
 

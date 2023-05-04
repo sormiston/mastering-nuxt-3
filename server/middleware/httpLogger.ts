@@ -1,11 +1,11 @@
 export default defineEventHandler((evt) => {
   // do nothing if process log-level does not equal http
   const runtimeConfig = useRuntimeConfig();
-  if (!runtimeConfig.httpLogs) return;
+  if (!runtimeConfig.httpLogs) { return; }
 
   const logger = getWinstonInstance();
   const {
-    node: { req, res },
+    node: { req },
   } = evt;
 
   const reducedRequest = {
@@ -16,5 +16,4 @@ export default defineEventHandler((evt) => {
   if (logger.http) {
     logger.http(JSON.stringify(reducedRequest, null, 2));
   }
-  
 });

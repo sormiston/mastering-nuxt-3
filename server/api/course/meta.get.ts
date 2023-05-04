@@ -1,9 +1,9 @@
-import { Course, Chapter, Lesson, CourseMeta } from "@/types/types";
-import course from "@/server/courseData.js";
+import { Course, Chapter, Lesson, CourseMeta } from '@/types/types';
+import course from '@/server/courseData.js';
 
 course as Course;
 
-export default defineEventHandler((event): CourseMeta => {
+export default defineEventHandler((): CourseMeta => {
   return {
     title: course.title,
     chapters: course.chapters.map(
