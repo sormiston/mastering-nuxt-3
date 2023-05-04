@@ -4,6 +4,8 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "lint": "eslint .",
+    "format:report": "prettier --check .",
+    "format:fix": "prettier --write .",
     "watch": "chokidar '**/*.{ts,js,vue}' -t 600 --initial --silent -c",
     "lint:fix": "eslint --fix .",
     "generate": "nuxt generate",
@@ -18,7 +20,9 @@
     "@vueuse/nuxt": "^9.13.0",
     "chokidar-cli": "^3.0.0",
     "eslint": "^8.39.0",
+    "eslint-config-prettier": "^8.8.0",
     "nuxt": "3.4.2",
+    "prettier": "^2.8.8",
     "winston": "^3.8.2"
   },
   "packageManager": "pnpm@8.1.1"

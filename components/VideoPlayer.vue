@@ -11,10 +11,10 @@
 </template>
 
 <script setup>
-const props = defineProps({
-  videoId: {
-    type: Number,
-    required: true,
-  },
-});
+  const props = defineProps({
+    videoId: {
+      type: Number,
+      required: true,
+    },
+  });
 </script>

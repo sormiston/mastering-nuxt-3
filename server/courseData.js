@@ -34,10 +34,8 @@ We also answer the question: “Are there any cases when you wouldn’t want to 
           title: 'Typing Component Events',
           slug: '3-typing-component-events',
           number: 3,
-          downloadUrl:
-            'https://vueschool.io/lessons/typing-component-events',
-          sourceUrl:
-            'https://vueschool.io/lessons/typing-component-events',
+          downloadUrl: 'https://vueschool.io/lessons/typing-component-events',
+          sourceUrl: 'https://vueschool.io/lessons/typing-component-events',
           videoId: 686921522,
           text: 'In this lesson, we learn how to type the payload of component events in Vue and TypeScript.',
         },
@@ -49,8 +47,7 @@ We also answer the question: “Are there any cases when you wouldn’t want to 
       number: 2,
       lessons: [
         {
-          title:
-            'Using TypeScript with the Options API in Components',
+          title: 'Using TypeScript with the Options API in Components',
           slug: '1-using-typescript-with-the-options-api-in-components',
           number: 1,
           downloadUrl:
@@ -84,10 +81,8 @@ We also answer the question: “Are there any cases when you wouldn’t want to 
           title: 'Typing Component Events',
           slug: '4-typing-component-events',
           number: 4,
-          downloadUrl:
-            'https://vueschool.io/lessons/typing-component-events',
-          sourceUrl:
-            'https://vueschool.io/lessons/typing-component-events',
+          downloadUrl: 'https://vueschool.io/lessons/typing-component-events',
+          sourceUrl: 'https://vueschool.io/lessons/typing-component-events',
           videoId: 686921522,
           text: 'In this lesson, we learn how to type the payload of component events in Vue and TypeScript.',
         },
@@ -99,8 +94,7 @@ We also answer the question: “Are there any cases when you wouldn’t want to 
       number: 3,
       lessons: [
         {
-          title:
-            'Using TypeScript with the Options API in Components',
+          title: 'Using TypeScript with the Options API in Components',
           slug: '1-using-typescript-with-the-options-api-in-components',
           number: 1,
           downloadUrl:
@@ -134,10 +128,8 @@ We also answer the question: “Are there any cases when you wouldn’t want to 
           title: 'Typing Component Events',
           slug: '4-typing-component-events',
           number: 4,
-          downloadUrl:
-            'https://vueschool.io/lessons/typing-component-events',
-          sourceUrl:
-            'https://vueschool.io/lessons/typing-component-events',
+          downloadUrl: 'https://vueschool.io/lessons/typing-component-events',
+          sourceUrl: 'https://vueschool.io/lessons/typing-component-events',
           videoId: 686921522,
           text: 'In this lesson, we learn how to type the payload of component events in Vue and TypeScript.',
         },

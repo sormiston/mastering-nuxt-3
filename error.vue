@@ -35,14 +35,14 @@
 </template>
 
 <script setup>
-defineProps({
-  error: Object,
-});
-
-const handleError = () => {
-  clearError({
-    redirect:
-      '/course/chapter/1-chapter-1/lesson/1-introduction-to-typescript-with-vue-js-3',
+  defineProps({
+    error: Object,
   });
-};
+
+  const handleError = () => {
+    clearError({
+      redirect:
+        '/course/chapter/1-chapter-1/lesson/1-introduction-to-typescript-with-vue-js-3',
+    });
+  };
 </script>

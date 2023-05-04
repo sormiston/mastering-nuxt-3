@@ -11,27 +11,27 @@
 </template>
 
 <script setup lang="ts">
-const course = await useCourse();
-const { query } = useRoute();
-const user = useSupabaseUser();
-const { auth } = useSupabaseAuthClient();
+  const course = await useCourse();
+  const { query } = useRoute();
+  const user = useSupabaseUser();
+  const { auth } = useSupabaseAuthClient();
 
-// add watch effect to redirect to /course if user is logged in
-watchEffect(async () => {
-  if (user.value && query.redirectTo) {
-    await navigateTo(query.redirectTo as string, { replace: true });
-  }
-});
-
-const login = async () => {
-  const redirectTo = `${window.location.origin}${query.redirectTo}`;
-  const { error } = await auth.signInWithOAuth({
-    provider: 'github',
-    options: { redirectTo },
+  // add watch effect to redirect to /course if user is logged in
+  watchEffect(async () => {
+    if (user.value && query.redirectTo) {
+      await navigateTo(query.redirectTo as string, { replace: true });
+    }
   });
 
-  if (error) {
-    console.error(error);
-  }
-};
+  const login = async () => {
+    const redirectTo = `${window.location.origin}${query.redirectTo}`;
+    const { error } = await auth.signInWithOAuth({
+      provider: 'github',
+      options: { redirectTo },
+    });
+
+    if (error) {
+      console.error(error);
+    }
+  };
 </script>

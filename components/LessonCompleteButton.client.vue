@@ -11,24 +11,24 @@
       :value="modelValue"
       class="hidden"
       @input="() => $emit('update:modelValue', !modelValue)"
-    >
+    />
     {{ modelValue ? 'Completed!' : 'Mark as complete' }}
   </label>
 </template>
 
 <script setup>
-defineProps({
-  modelValue: {
-    type: Boolean,
-    default: false,
-  },
-});
+  defineProps({
+    modelValue: {
+      type: Boolean,
+      default: false,
+    },
+  });
 
-defineEmits(['update:modelValue']);
+  defineEmits(['update:modelValue']);
 </script>
 
 <style scoped>
-::selection {
-  display: none;
-}
+  ::selection {
+    display: none;
+  }
 </style>

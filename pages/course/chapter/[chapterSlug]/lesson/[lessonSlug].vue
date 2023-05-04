@@ -35,87 +35,87 @@
 </template>
 
 <script lang="ts" setup>
-const course = await useCourse();
-const { params } = useRoute();
-const { chapterSlug, lessonSlug } = params;
-const lesson = await useLesson(chapterSlug as string, lessonSlug as string);
+  const course = await useCourse();
+  const { params } = useRoute();
+  const { chapterSlug, lessonSlug } = params;
+  const lesson = await useLesson(chapterSlug as string, lessonSlug as string);
 
-definePageMeta({
-  middleware: [
-    async ({ params }) => {
-      const course = await useCourse();
-      const chapter = course.value.chapters.find(
-        chapter => chapter.slug === params.chapterSlug
-      );
-
-      if (!chapter) {
-        return abortNavigation(
-          createError({
-            statusCode: 404,
-            message: 'Chapter not found',
-          })
+  definePageMeta({
+    middleware: [
+      async ({ params }) => {
+        const course = await useCourse();
+        const chapter = course.value.chapters.find(
+          (chapter) => chapter.slug === params.chapterSlug
         );
-      }
 
-      const lesson = chapter.lessons.find(
-        lesson => lesson.slug === params.lessonSlug
-      );
+        if (!chapter) {
+          return abortNavigation(
+            createError({
+              statusCode: 404,
+              message: 'Chapter not found',
+            })
+          );
+        }
 
-      if (!lesson) {
-        return abortNavigation(
-          createError({
-            statusCode: 404,
-            message: 'Lesson not found',
-          })
+        const lesson = chapter.lessons.find(
+          (lesson) => lesson.slug === params.lessonSlug
         );
-      }
-    },
-    'auth',
-  ],
-});
 
-const chapter = computed(() => {
-  return course.value.chapters.find(
-    chapter => chapter.slug === params.chapterSlug
-  )!;
-});
+        if (!lesson) {
+          return abortNavigation(
+            createError({
+              statusCode: 404,
+              message: 'Lesson not found',
+            })
+          );
+        }
+      },
+      'auth',
+    ],
+  });
 
-const title = computed(() => {
-  return `${lesson.value?.title} - ${course.value.title}`;
-});
+  const chapter = computed(() => {
+    return course.value.chapters.find(
+      (chapter) => chapter.slug === params.chapterSlug
+    )!;
+  });
 
-useHead({
-  title,
-});
+  const title = computed(() => {
+    return `${lesson.value?.title} - ${course.value.title}`;
+  });
 
-const progress = useLocalStorage<Array<Array<boolean>>>('progress', [[]]);
+  useHead({
+    title,
+  });
 
-const isLessonComplete = computed(() => {
-  if (!chapter.value || !lesson.value) {
-    return false;
-  }
+  const progress = useLocalStorage<Array<Array<boolean>>>('progress', [[]]);
 
-  if (!progress.value[chapter.value.number - 1]) {
-    return false;
-  }
+  const isLessonComplete = computed(() => {
+    if (!chapter.value || !lesson.value) {
+      return false;
+    }
 
-  if (!progress.value[chapter.value?.number - 1][lesson.value?.number - 1]) {
-    return false;
-  }
+    if (!progress.value[chapter.value.number - 1]) {
+      return false;
+    }
 
-  return progress.value[chapter.value.number - 1][lesson.value.number - 1];
-});
+    if (!progress.value[chapter.value?.number - 1][lesson.value?.number - 1]) {
+      return false;
+    }
 
-const toggleComplete = () => {
-  if (!chapter.value || !lesson.value) {
-    return false;
-  }
+    return progress.value[chapter.value.number - 1][lesson.value.number - 1];
+  });
 
-  if (!progress.value[chapter.value.number - 1]) {
-    progress.value[chapter.value.number - 1] = [];
-  }
+  const toggleComplete = () => {
+    if (!chapter.value || !lesson.value) {
+      return false;
+    }
 
-  progress.value[chapter.value.number - 1][lesson.value.number - 1] =
-    !isLessonComplete.value;
-};
+    if (!progress.value[chapter.value.number - 1]) {
+      progress.value[chapter.value.number - 1] = [];
+    }
+
+    progress.value[chapter.value.number - 1][lesson.value.number - 1] =
+      !isLessonComplete.value;
+  };
 </script>
