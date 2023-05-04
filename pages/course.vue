@@ -54,11 +54,11 @@
 </template>
 
 <script lang="ts" setup>
-const course = await useCourse();
-const firstLesson = await useFirstLesson();
-const { title, chapters } = course.value;
-const resetError = async (error: Ref) => {
-  await navigateTo(firstLesson.value.path);
-  error.value = null;
-};
+  const course = await useCourse();
+  const firstLesson = await useFirstLesson();
+  const { title, chapters } = course.value;
+  const resetError = async (error: Ref) => {
+    await navigateTo(firstLesson.value.path);
+    error.value = null;
+  };
 </script>

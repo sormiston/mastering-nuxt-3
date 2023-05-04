@@ -20,27 +20,27 @@
 </template>
 
 <script lang="ts" setup>
-const user = useSupabaseUser();
-const { auth } = useSupabaseAuthClient();
+  const user = useSupabaseUser();
+  const { auth } = useSupabaseAuthClient();
 
-const name = computed(() => {
-  if (user.value) {
-    return user.value.user_metadata.full_name;
-  }
-});
+  const name = computed(() => {
+    if (user.value) {
+      return user.value.user_metadata.full_name;
+    }
+  });
 
-const profile = computed(() => {
-  if (user.value) {
-    return user.value.user_metadata.avatar_url;
-  }
-});
+  const profile = computed(() => {
+    if (user.value) {
+      return user.value.user_metadata.avatar_url;
+    }
+  });
 
-const logout = async () => {
-  const { error } = await auth.signOut();
-  if (error) {
-    console.error(error);
-  }
+  const logout = async () => {
+    const { error } = await auth.signOut();
+    if (error) {
+      console.error(error);
+    }
 
-  await navigateTo("/");
-};
+    await navigateTo('/');
+  };
 </script>

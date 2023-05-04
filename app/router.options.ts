@@ -16,6 +16,8 @@ export default {
     ) {
       return false;
       // else scroll to the top of the page
-    } else { return { top: 0, left: 0 }; }
+    } else {
+      return { top: 0, left: 0 };
+    }
   },
 };
