@@ -6,6 +6,6 @@ export default defineNuxtConfig({
     client: true,
   },
   runtimeConfig: {
-    httpLogs: false,
+    httpLogs: 'none',
   },
 });
