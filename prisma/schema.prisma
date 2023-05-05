@@ -1,0 +1,53 @@
+// prisma schema database block for postgres
+datasource db {
+    provider  = "postgresql"
+    url       = env("DATABASE_URL")
+    directUrl = env("DIRECT_URL")
+}
+
+// prisma schema generator block for js client
+generator client {
+    provider = "prisma-client-js"
+    output   = "../node_modules/.prisma/client"
+}
+
+// prisma schema model block for Course
+model Course {
+    id        Int       @id @default(autoincrement())
+    title     String
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    // prisma schema relation block for Course to Chapter
+    chapters  Chapter[]
+}
+
+// prisma schema model block for Chapter
+model Chapter {
+    id        Int      @id @default(autoincrement())
+    title     String
+    slug      String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    // prisma schema relation for Chapter to Course
+    course    Course   @relation(fields: [courseId], references: [id])
+    courseId  Int
+    // prisma schema relation for Chapter to Lesson
+    lessons   Lesson[]
+}
+
+// prisma schema model block for Lesson
+model Lesson {
+    id          Int      @id @default(autoincrement())
+    title       String
+    slug        String   @unique
+    number      Int
+    downloadUrl String
+    sourceUrl   String?
+    videoId     Int
+    text        String
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+    // prisma schema relation block for Lesson to Chapter
+    Chapter     Chapter  @relation(fields: [chapterId], references: [id])
+    chapterId   Int
+}
