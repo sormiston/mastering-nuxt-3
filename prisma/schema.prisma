@@ -25,7 +25,8 @@ model Course {
 model Chapter {
     id        Int      @id @default(autoincrement())
     title     String
-    slug      String
+    number    Int
+    slug      String   @unique
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
     // prisma schema relation for Chapter to Course
@@ -39,7 +40,7 @@ model Chapter {
 model Lesson {
     id          Int      @id @default(autoincrement())
     title       String
-    slug        String   @unique
+    slug        String
     number      Int
     downloadUrl String
     sourceUrl   String?
