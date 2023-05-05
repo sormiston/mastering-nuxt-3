@@ -1,7 +1,7 @@
 export default defineEventHandler((evt) => {
   // do nothing if process log-level does not equal http
   const runtimeConfig = useRuntimeConfig();
-  if (!runtimeConfig.httpLogs) {
+  if (runtimeConfig.httpLogs === 'none') {
     return;
   }
 
@@ -15,7 +15,6 @@ export default defineEventHandler((evt) => {
     url: req.url,
     headers: req.headers,
   };
-  if (logger.http) {
-    logger.http(JSON.stringify(reducedRequest, null, 2));
-  }
+
+  logger.http(JSON.stringify(reducedRequest, null, 2));
 });
