@@ -4,6 +4,8 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "lint": "eslint .",
+    "type-check": "tsc --noEmit",
+    "static-analysis": "pnpm lint && pnpm type-check",
     "format:report": "prettier --check .",
     "format:fix": "prettier --write .",
     "watch": "chokidar '**/*.{ts,js,vue}' -t 600 --initial --silent -c",
