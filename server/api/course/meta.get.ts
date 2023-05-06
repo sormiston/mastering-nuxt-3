@@ -1,21 +1,46 @@
-import { Course, Chapter, Lesson, CourseMeta } from '@/types/types';
-import course from '@/server/courseData.js';
+import { PrismaClient } from '@prisma/client';
+import { CourseMeta } from '@/types/types';
 
-course as Course;
+const prisma = new PrismaClient();
 
-export default defineEventHandler((): CourseMeta => {
-  return {
-    title: course.title,
-    chapters: course.chapters.map((chapter: Chapter) => ({
-      title: chapter.title,
-      slug: chapter.slug,
-      number: chapter.number,
-      lessons: chapter.lessons.map((lesson: Lesson) => ({
-        title: lesson.title,
-        slug: lesson.slug,
-        number: lesson.number,
+export default defineEventHandler<CourseMeta>(async () => {
+  const response = await prisma.course.findFirst({
+    select: {
+      title: true,
+      chapters: {
+        select: {
+          title: true,
+          slug: true,
+          number: true,
+          lessons: {
+            select: {
+              title: true,
+              slug: true,
+              number: true,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  if (!response) {
+    throw createError({
+      statusCode: 404,
+      statusMessage: `Course not found`,
+    });
+  }
+
+  const courseMeta: CourseMeta = {
+    ...response,
+    chapters: response.chapters.map((chapter) => ({
+      ...chapter,
+      lessons: chapter.lessons.map((lesson) => ({
+        ...lesson,
         path: `/course/chapter/${chapter.slug}/lesson/${lesson.slug}`,
       })),
     })),
   };
+  
+  return courseMeta;
 });
