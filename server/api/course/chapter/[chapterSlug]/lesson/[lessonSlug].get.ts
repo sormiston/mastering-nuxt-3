@@ -1,40 +1,41 @@
 import { getRouterParams } from 'h3';
-import { Course, Chapter, Lesson, LessonWithPath } from '@/types/types';
-import course from '@/server/courseData.js';
+import { PrismaClient } from '@prisma/client';
 
-course as Course;
+// instantiate prisma client outside of the event handler!
+const prisma = new PrismaClient();
 
-export default defineEventHandler((event): LessonWithPath => {
+export default defineEventHandler(async (event) => {
   // Using unjs/h3 utility function to get router params
   // https://www.jsdocs.io/package/h3#package-index-functions
   // alternatively, can access event.context.params;
   const { chapterSlug, lessonSlug } = getRouterParams(event);
   // alternatively, can access event.context.params;
   // const { chapterSlug, lessonSlug } = event.context.params;
-  const chapter: Maybe<Chapter> = course.chapters.find(
-    (chapter) => chapter.slug === chapterSlug
-  );
 
-  if (!chapter) {
+  const chapterAndLesson = await prisma.chapter.findUnique({
+    where: {
+      slug: chapterSlug,
+    },
+    include: {
+      lessons: {
+        where: { slug: lessonSlug },
+      },
+    },
+  });
+
+  if (!chapterAndLesson) {
     throw createError({
       statusCode: 404,
-      message: 'Chapter not found',
+      statusMessage: `provided Chapter "${chapterSlug}" not found`,
     });
   }
 
-  const lesson: Maybe<Lesson> = chapter.lessons.find(
-    (lesson) => lesson.slug === lessonSlug
-  );
-
-  if (!lesson) {
+  if (chapterAndLesson.lessons.length === 0) {
     throw createError({
       statusCode: 404,
-      message: 'Lesson not found',
+      statusMessage: `provided Lesson "${lessonSlug}" not found in chapter ${chapterSlug}`,
     });
   }
 
-  return {
-    ...lesson,
-    path: `/course/chapter/${chapter.slug}/lesson/${lesson.slug}`,
-  };
+  return chapterAndLesson?.lessons[0];
 });
