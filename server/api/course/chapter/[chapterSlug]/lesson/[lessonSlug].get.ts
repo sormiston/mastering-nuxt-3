@@ -1,10 +1,11 @@
 import { getRouterParams } from 'h3';
 import { PrismaClient } from '@prisma/client';
+import { LessonWithPath } from '@/types/types';
 
 // instantiate prisma client outside of the event handler!
 const prisma = new PrismaClient();
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler<LessonWithPath>(async (event) => {
   // Using unjs/h3 utility function to get router params
   // https://www.jsdocs.io/package/h3#package-index-functions
   // alternatively, can access event.context.params;
@@ -37,5 +38,10 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  return chapterAndLesson?.lessons[0];
+  const lessonWithPath: LessonWithPath = {
+    ...chapterAndLesson?.lessons[0],
+    path: `/course/chapter/${chapterSlug}/lesson/${lessonSlug}`,
+  };
+
+  return lessonWithPath;
 });
