@@ -1,6 +1,6 @@
 [build]
   command = "pnpm build && brew install tree && tree -a -f -L 2"
-  publish= "dist"
+  publish = "dist"
 
 
 [build.environment]
