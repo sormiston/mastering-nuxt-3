@@ -1,0 +1,10 @@
+[build]
+  command = "prisma generate && pnpm build && brew install tree && tree node_modules"
+  publish="./dist"
+
+
+[build.environment]
+  NODE_VERSION = "18"
+  PNPM_VERSION = "8"
+
+
