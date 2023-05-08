@@ -1,5 +1,6 @@
 import { getRouterParams } from 'h3';
 import { PrismaClient } from '@prisma/client';
+import protectRoute from '@/server/utils/protectRoute';
 import { LessonWithPath } from '@/types/types';
 
 // instantiate prisma client outside of the event handler!
@@ -12,6 +13,11 @@ export default defineEventHandler<LessonWithPath>(async (event) => {
   const { chapterSlug, lessonSlug } = getRouterParams(event);
   // alternatively, can access event.context.params;
   // const { chapterSlug, lessonSlug } = event.context.params;
+
+  // Allow users to access first lesson without being logged in
+  if (chapterSlug !== '1-chapter-1') {
+    protectRoute(event);
+  }
 
   const chapterAndLesson = await prisma.chapter.findUnique({
     where: {
