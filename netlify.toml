@@ -1,5 +1,5 @@
 [build]
-  command = "prisma generate && pnpm build && brew install tree && tree node_modules"
+  command = "pnpm build && brew install tree && tree -a -f -L 2"
   publish="./dist"
 
 
