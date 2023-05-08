@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "build": "nuxt build",
+    "build": "pnpm prisma:generate-client && nuxt build",
     "dev": "nuxi dev",
     "lint": "eslint .",
     "type-check": "tsc --noEmit",
@@ -11,6 +11,7 @@
     "watch": "chokidar '**/*.{ts,js,vue}' -t 600 --initial --silent -c",
     "lint:fix": "eslint --fix .",
     "generate": "nuxt generate",
+    "prisma:generate-client": "prisma generate",
     "preview": "nuxt preview"
   },
   "prisma": {
