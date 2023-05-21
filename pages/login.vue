@@ -17,12 +17,12 @@
   const { auth } = useSupabaseAuthClient();
 
   // add watch effect to redirect to /course if user is logged in
-  watchEffect(async () => {
+  watchEffect(() => {
     if (user.value && query.redirectTo) {
-      await navigateTo(query.redirectTo as string, { replace: true });
+      navigateTo(query.redirectTo as string, { replace: true });
     }
   });
-
+ 
   const login = async () => {
     const redirectTo = `${window.location.origin}${query.redirectTo}`;
     const { error } = await auth.signInWithOAuth({
@@ -33,5 +33,6 @@
     if (error) {
       console.error(error);
     }
+
   };
 </script>
