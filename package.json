@@ -28,7 +28,7 @@
     "chokidar-cli": "^3.0.0",
     "eslint": "^8.39.0",
     "eslint-config-prettier": "^8.8.0",
-    "nuxt": "3.4.2",
+    "nuxt": "3.4.3",
     "prettier": "^2.8.8",
     "prisma": "^4.13.0",
     "winston": "^3.8.2"

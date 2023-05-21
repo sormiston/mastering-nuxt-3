@@ -1,0 +1,5 @@
+{
+    "workbench.colorTheme": "Ayu Dark Bordered",
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+}

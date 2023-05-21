@@ -1,3 +1,5 @@
+import { getWinstonInstance } from '../utils/winstonHttpLogger';
+
 export default defineEventHandler((evt) => {
   // do nothing if process log-level does not equal http
   const runtimeConfig = useRuntimeConfig();
